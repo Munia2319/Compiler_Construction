@@ -95,6 +95,10 @@ This guide provides a step-by-step approach to working with JavaCC, including cr
 3. Compile with: `javac *.java`
 4. For taking input from a file: `java MyLanguageParser < input.txt`
    - `MyLanguageParser` will be the name of your parser. In IntelliJ terminal, use: `Get-Content input.txt | java MyLanguageParser`
+   - For our Parser the output will be like that
+
+![Output of the Parser](./Whole_Parser_output.png)
+
 
 ### Implementing JJTree
 
@@ -130,6 +134,9 @@ After you have generated the parser as per the instructions in the previous sect
     Replace `path/to/javacc.jar` with the actual path to your `javacc.jar` file, and ensure you're in the directory containing `Calculator.jj` when you run these commands.
 
 4. **View Your Output**: After running the `Calculator` program, your output will be displayed in the command prompt or terminal window. This output will show the results of the calculator operations defined in your `Calculator.jj` grammar file.
+### Ouptput of the Calculator
+
+![Input for JJTree as Argument](./Calculator_output.png)
 
 **Note**: Make sure you have followed the setup instructions correctly, especially regarding the installation of JavaCC and the configuration within your IDE or command line environment.
 
