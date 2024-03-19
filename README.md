@@ -31,8 +31,17 @@ You can either download the JavaCC jar directly or use a build tool like Maven o
   - Go to `Libraries`, click the `+` button, and add the `javacc.jar` file.
 
 [Additional Installation Information](https://stackoverflow.com/questions/60589049/how-to-setup-javacc-in-windows-10)
+#### Using Maven
 
+Add the following dependency to your `pom.xml`:
 
+```xml
+<dependency>
+    <groupId>net.java.dev.javacc</groupId>
+    <artifactId>javacc</artifactId>
+    <version>7.0.10</version> <!-- Check for the latest version -->
+</dependency>
+```
 # Guide to Using JavaCC in IntelliJ IDEA and Command Prompt
 
 This guide provides a step-by-step approach to working with JavaCC, including creating grammar files, compiling grammars, generating parsers, troubleshooting, and running files in IntelliJ IDEA and the command prompt.
