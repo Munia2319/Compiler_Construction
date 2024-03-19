@@ -1,0 +1,21 @@
+Algorithm name-fibonacci
+Declaration block- integer t1 = 0, t2 = 1, nextTerm = 0, n=5;
+
+start{
+    show("Fibonacci Series:" + t1 + "," + t2);
+    nextTerm = t1 + t2;
+	
+    if(nextTerm <= n) {
+        show(nextTerm);
+        t1 = t2;
+        t2 = nextTerm;
+        nextTerm = t1 + t2;
+    }
+    
+	while(nextTerm <= n) {
+        show(nextTerm);
+        t1 = t2;
+        t2 = nextTerm;
+        nextTerm = t1 + t2;
+    }
+}end
