@@ -136,7 +136,7 @@ After you have generated the parser as per the instructions in the previous sect
 4. **View Your Output**: After running the `Calculator` program, your output will be displayed in the command prompt or terminal window. This output will show the results of the calculator operations defined in your `Calculator.jj` grammar file.
 ### Ouptput of the Calculator
 
-![Input for JJTree as Argument](./Calculator_output.png)
+![Output of our Calculator](./calculator_output.png)
 
 **Note**: Make sure you have followed the setup instructions correctly, especially regarding the installation of JavaCC and the configuration within your IDE or command line environment.
 
