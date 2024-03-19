@@ -32,19 +32,6 @@ You can either download the JavaCC jar directly or use a build tool like Maven o
 
 [Additional Installation Information](https://stackoverflow.com/questions/60589049/how-to-setup-javacc-in-windows-10)
 
-#### Using Maven
-
-Add the following dependency to your `pom.xml`:
-
-```xml
-<dependencies>
-    <dependency>
-        <groupId>net.java.dev.javacc</groupId>
-        <artifactId>javacc</artifactId>
-        <version>7.0.10</version> <!-- Check for the latest version -->
-    </dependency>
-    <!-- Other dependencies can be added here -->
-</dependencies>
 
 # Guide to Using JavaCC in IntelliJ IDEA and Command Prompt
 
