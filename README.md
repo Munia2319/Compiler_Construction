@@ -3,6 +3,7 @@ A small compiler for calculator using javacc
 <p>We have 3 folders:</p>
 <ul>
   <li><b>Code Generation of Calculator</b> - This folder contains the file for code generation, which works exclusively with float number values and parses the output from its input file.</li>
+  ![Output of our Calculator](./calculator_output.png)
   <li><b>Final Parser</b> - Contains the full parser implementation.</li>
   <li><b>Final Parser with JJTree</b> - Houses the JJTree implementation along with the parser.</li>
 </ul>
