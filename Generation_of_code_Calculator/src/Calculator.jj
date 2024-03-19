@@ -107,7 +107,7 @@ TOKEN : {
 TOKEN : {
   < #INTEGER_PART: (<DIGIT>) + >
 | < #FRACTIONAL_PART: "." (<DIGIT>)+ >
-| < NUMBER_LITERAL: <INTEGER_PART> (<FRACTIONAL_PART>)? >
+| < NUMBER_LITERAL: <INTEGER_PART> (<FRACTIONAL_PART>) >
 }
 
 
@@ -163,7 +163,7 @@ void VariableDeclaration(): {}
 
 void Type() : {}
 {
-    <INTEGER> | <FLOAT> | <STRING> | <VOID>
+     <FLOAT>
 }
 
 
