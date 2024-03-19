@@ -42,4 +42,69 @@ Add the following dependency to your `pom.xml`:
     <artifactId>javacc</artifactId>
     <version>7.0.10</version> <!-- Check for the latest version -->
 </dependency>
+# Guide to Using JavaCC in IntelliJ IDEA and Command Prompt
+
+This guide provides a step-by-step approach to working with JavaCC, including creating grammar files, compiling grammars, generating parsers, troubleshooting, and running files in IntelliJ IDEA and the command prompt.
+
+## 3. Create a Grammar File
+
+- Right-click on your source folder (e.g., `src/main/java`), navigate to `New > File`, and create a new file with a `.jj` extension (e.g., `MyGrammar.jj`).
+- Write or paste your JavaCC grammar into this file.
+
+## 4. Compile Your Grammar
+
+### Manually
+
+1. Open a terminal or command prompt.
+2. Navigate to the directory containing your `.jj` file.
+3. Run the command: `java -cp path/to/javacc.jar javacc MyGrammar.jj`
+   - Replace `path/to/javacc.jar` with the actual path to your `javacc.jar` file and `MyGrammar.jj` with the name of your grammar file.
+
+### Automating with IntelliJ
+
+1. Go to `Run > Edit Configurations`.
+2. Click the `+` button and select `Application`.
+3. In the `Main class` field, enter `javacc`.
+4. In the `Program arguments` field, enter the path to your `.jj` file relative to the project root.
+5. In the `Classpath` field, add your project and the JavaCC library.
+6. Apply the changes and run this configuration to compile your grammar.
+
+## 5. Generate Parser
+
+- Compiling the `.jj` file generates several Java files, including the parser and token manager. Include these generated files in your project and use them as part of your application.
+
+## 6. Troubleshooting
+
+- Ensure the JavaCC version is compatible with your project's Java version.
+- If you encounter "class not found" or similar errors, double-check the classpath and ensure `javacc.jar` is correctly referenced.
+- For syntax errors in the `.jj` file, consult the JavaCC documentation for proper grammar syntax.
+
+## 7. Run File in IntelliJ
+
+- After generating the parser, modify the main program to take input from the terminal.
+- There will be a generated file, for example, `MyParser`. Run `MyParser` and check for errors.
+- After running the main program, you should see the expected output.
+
+## 8. Run File in the Command Prompt
+
+### Javacc using in command prompt
+
+1. Make the `.jj` file first.
+2. Execute: `java -cp path/to/javacc.jar javacc MyGrammar.jj`
+   - Replace `path/to/javacc.jar` with the actual path to your `javacc.jar` file and `MyGrammar.jj` with the name of your grammar file.
+3. Compile with: `javac *.java`
+4. For taking input from a file: `java MyLanguageParser < input.txt`
+   - `MyLanguageParser` will be the name of your parser. In IntelliJ terminal, use: `Get-Content input.txt | java MyLanguageParser`
+
+### Implementing JJTree
+
+- Follow the guide on [how to implement JJTree on grammar](https://stackoverflow.com/questions/13902239/how-to-implement-jjtree-on-grammar).
+- Make a file called, for example, `MyGrammar.jjt`.
+- Then modify your main program like the code in the link above.
+- Run the following command: `java -cp path/to/javacc.jar jjtree MyGrammar.jjt` then `java -cp path/to/javacc.jar javacc MyGrammar.jj`
+- Compile with: `javac *.java`
+- Run your parser with a test input: `java MyLanguageParser 'Your test input here'`
+
+**Note:** If `java -cp` doesn’t work for you, then use only `jjtree MyGrammar.jjt` and `javacc MyGrammar.jj`.
+
 
