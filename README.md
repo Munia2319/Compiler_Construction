@@ -104,6 +104,7 @@ This guide provides a step-by-step approach to working with JavaCC, including cr
 - Run the following command: `java -cp path/to/javacc.jar jjtree MyGrammar.jjt` then `java -cp path/to/javacc.jar javacc MyGrammar.jj`
 - Compile with: `javac *.java`
 - Run your parser with a test input: `java MyLanguageParser 'Your test input here'`
+![Input for JJTree as Argument](./input_for_jjtree_as_argument.png)
 
 **Note:** If `java -cp` doesn’t work for you, then use only `jjtree MyGrammar.jjt` and `javacc MyGrammar.jj`.
 ...
