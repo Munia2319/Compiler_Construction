@@ -97,5 +97,37 @@ This guide provides a step-by-step approach to working with JavaCC, including cr
 - Run your parser with a test input: `java MyLanguageParser 'Your test input here'`
 
 **Note:** If `java -cp` doesn’t work for you, then use only `jjtree MyGrammar.jjt` and `javacc MyGrammar.jj`.
+...
+
+## For Running the Generated Code
+
+After you have generated the parser as per the instructions in the previous sections, you can run the generated code to see it in action. This example focuses on running a calculator program generated from a `.jj` file.
+
+### Steps to Run the Calculator Program
+
+1. **Navigate to the Generated Code Directory**: Open your project directory and navigate to the `Generation_of_code_calculator` folder.
+
+2. **Locate the Calculator Grammar File**: Inside the directory, go to `src` and find the `Calculator.jj` file. This file contains the grammar definitions used by JavaCC to generate the parser.
+
+3. **Compile and Run the Program**: Follow the instructions provided in the "Compiling Your Grammar" and "Running File in the Command Prompt" sections to compile the `.jj` file and run the generated parser. In this case, your commands in the terminal or command prompt might look something like this:
+
+    ```bash
+    java -cp path/to/javacc.jar javacc Calculator.jj
+    javac *.java
+    java Calculator
+    ```
+
+    Replace `path/to/javacc.jar` with the actual path to your `javacc.jar` file, and ensure you're in the directory containing `Calculator.jj` when you run these commands.
+
+4. **View Your Output**: After running the `Calculator` program, your output will be displayed in the command prompt or terminal window. This output will show the results of the calculator operations defined in your `Calculator.jj` grammar file.
+
+**Note**: Make sure you have followed the setup instructions correctly, especially regarding the installation of JavaCC and the configuration within your IDE or command line environment.
+
+## Troubleshooting
+
+If you encounter any issues while running your generated code, refer back to the "Troubleshooting" section for guidance on common problems and solutions.
+
+...
+
 
 
