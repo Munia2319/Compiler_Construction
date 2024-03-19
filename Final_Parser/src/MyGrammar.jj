@@ -1,0 +1,394 @@
+options {
+  STATIC = false;
+}
+
+PARSER_BEGIN(MyLanguageParser)
+
+public class MyLanguageParser {
+  public static void main(String[] args)  {
+    MyLanguageParser parser = new MyLanguageParser(System.in);
+    try{
+        parser.Program();
+        System.out.println("Parsing completed successfully.");
+    }
+    catch(ParseException e){
+        System.out.println("Error");
+        e.printStackTrace();
+    }
+
+  }
+}
+
+PARSER_END(MyLanguageParser)
+
+
+SKIP :
+{
+    " "
+  | "\t"
+  | "\r"
+  | "\n"
+}
+
+
+TOKEN : /* Keywords */
+{
+    < ALGORITHM_NAME: "Algorithm name-" >
+  | < DECLARATION: "Declaration block-" >
+  | < INTEGER: "integer" >
+  | < FLOAT: "float" >
+  | < STRING: "string" >
+  | < VOID: "void" >
+  | < FUNCTION: "function" >
+  | < START: "start" >
+  | < END: "end" >
+  | < IF: "if" >
+  | < ELSE_IF: "else if">
+  | < ELSE: "else" >
+  | < WHILE: "while" >
+  | < SHOW: "show" >
+  | < RETURN: "return" >
+  | < BREAK: "break" >
+  | < TRUE: "true" >
+  | < FALSE: "false" >
+  | < AND: "AND" >
+  | < OR: "OR" >
+  | < NOT: "NOT" >
+}
+
+TOKEN : /* Symbols and Operators */
+{
+    < SEMICOLON: ";" >
+  | < COMMA: "," >
+  | < EQUALS: "=" >
+  | < LPAREN: "(" >
+  | < RPAREN: ")" >
+  | < LBRACE: "{" >
+  | < RBRACE: "}" >
+  | < PLUS: "+" >
+  | < MINUS: "-" >
+  | < MULT: "*" >
+  | < DIV: "/" >
+  | < DOT: "." >
+  | < HASH: "#" >
+  | < LESS: "<" >
+  | < GREATER: ">" >
+  | < LESSEQUAL: "<=" >
+  | < GREATEREQUAL: ">=" >
+  | < EQUAL: "==" >
+  | < NOTEQUAL: "!=" >
+  | < COLON: ":" >
+}
+
+TOKEN : {
+  < #LETTER: ["a"-"z", "A"-"Z"] >
+| < #DIGIT: ["0"-"9"] >
+| < ID: <LETTER> (<LETTER> | <DIGIT> | "_" | "-" )* >
+}
+
+TOKEN : {
+  < STRING_LITERAL: "\"" (~["\""])* "\"" >
+}
+
+TOKEN : {
+  < #INTEGER_PART: (<DIGIT>) + >
+| < #FRACTIONAL_PART: "." (<DIGIT>)+ >
+| < NUMBER_LITERAL: <INTEGER_PART> (<FRACTIONAL_PART>)? >
+}
+
+
+/*TOKEN :
+{
+    < IDENTIFIER: (["a"-"z","A"-"Z","_"])(["a"-"z","A"-"Z","0"-"9","_"])* >
+  | < INTEGER_LITERAL: (["0"-"9"])+ >
+  | < FLOAT_LITERAL: (["0"-"9"])+ "."(["0"-"9"])+ >
+  | < STRING_LITERAL: "\"" (~["\"","\\"] | "\\\\" | "\\\"")* "\"" >
+}*/
+
+
+
+void Program() :
+{}
+{
+  AlgorithmName() VariableFunctionDeclarations() MainBlock()
+}
+
+void AlgorithmName() :
+{}
+{
+  <ALGORITHM_NAME> <ID>
+}
+
+void VariableFunctionDeclarations() :
+{}
+{
+  (DeclarationBlock())?
+}
+
+void DeclarationBlock() :
+{}
+{
+  <DECLARATION> (Declaration())*
+}
+
+void Declaration(): {}
+{
+    Type() VarFuncDeclarationTail()
+}
+
+void VarFuncDeclarationTail(): {}
+{
+    VariableDeclaration() | FunctionDeclaration()
+}
+
+void VariableDeclaration(): {}
+{
+    Variables() <SEMICOLON>
+}
+
+
+void Type() : {}
+{
+    <INTEGER> | <FLOAT> | <STRING> | <VOID>
+}
+
+
+void Variables() : {}
+{
+    Variable() (LOOKAHEAD(2) VariableTail())*
+}
+
+
+void VariableTail() : {}
+{
+    <COMMA> Variable() (LOOKAHEAD(2) VariableTail())?
+}
+
+void Variable() : {}
+{
+    <ID> [Variable2()]
+}
+
+void Variable2() : {}
+{
+    <EQUALS> Expression()
+}
+
+void FunctionDeclaration(): {}
+{
+    <FUNCTION> <ID> <LPAREN> Parameters() <RPAREN> Block()
+}
+
+void Parameters() : {}
+{
+    Parameter() (ParametersTail())*
+}
+
+
+void ParametersTail() : {}
+{
+    <COMMA> Parameter() (LOOKAHEAD(2) ParametersTail())?
+}
+
+
+void Parameter() : {}
+{
+    Type() Variables()
+}
+
+
+
+void MainBlock() :
+{}
+{
+  <START> Block() <END>
+}
+
+void Block() :
+{}
+{
+  <LBRACE> (Content())? <RBRACE>
+}
+
+void Content() : {}
+{
+    Statements()
+}
+
+void Statements() : {}
+{
+    Statement() (StatementsTail())*
+}
+
+
+void StatementsTail() : {}
+{
+    Statement() (LOOKAHEAD(2) StatementsTail())?
+}
+
+
+void Statement() : {}
+{
+    IfStatement() | WhileStatement() | AssignmentStatement() | PrintStatement() | CommentStatement() | BreakStatement() | ReturnStatement()
+}
+
+void IfStatement() : {}
+{
+    <IF> <LPAREN> BoolExpression() <RPAREN> Block() (ElseIfStatement())* [ElseStatement()]
+}
+
+void ElseIfStatement() : {}
+{
+    <ELSE_IF> <LPAREN> BoolExpression() <RPAREN> Block()
+}
+
+void ElseStatement() : {}
+{
+    <ELSE> Block()
+}
+
+void WhileStatement() : {}
+{
+    <WHILE> <LPAREN> BoolExpression() <RPAREN> Block()
+}
+
+void AssignmentStatement(): {}
+{
+    <ID> <EQUALS> AssignmentStatementTail()
+}
+
+
+void AssignmentStatementTail() : {}
+{
+    LOOKAHEAD(3) VariableAssignment() | FunctionCallAssignment()
+}
+
+
+void VariableAssignment() : {}
+{
+     ArithmeticExpression() <SEMICOLON>
+}
+
+void FunctionCallAssignment() : {}
+{
+    FunctionCall() <SEMICOLON>
+}
+
+void FunctionCall() : {}
+{
+    <FUNCTION> <ID> <LPAREN> [Parameters()] <RPAREN>
+}
+
+void CommentStatement() : {}
+{
+    <HASH>(<NUMBER_LITERAL> | <STRING_LITERAL>)<HASH>
+}
+
+
+void ReturnStatement() : {}
+{
+    <RETURN> ArithmeticExpression() <SEMICOLON>
+}
+
+void BreakStatement() : {}
+{
+    <BREAK> <SEMICOLON>
+}
+
+void PrintStatement() : {}
+{
+    <SHOW> <LPAREN> PrintArguments() <RPAREN> <SEMICOLON>
+}
+
+void PrintArguments() : {}
+{
+    PrintArgument() (PrintArgumentsTail())*
+}
+
+void PrintArgumentsTail() : {}
+{
+    <PLUS> PrintArgument() (LOOKAHEAD(3) PrintArgumentsTail())?
+}
+
+void PrintArgument() : {}
+{
+    <STRING_LITERAL> | <ID>
+}
+/* Implementation of expressions */
+void Expression() : {}
+{
+    LOOKAHEAD(3) BoolExpression() | ArithmeticExpression()
+}
+
+
+void BoolExpression() : {}
+{
+    BTerm() BoolExpressionTail()
+}
+
+void BoolExpressionTail() : {}
+{
+    (<OR> BTerm())*
+}
+
+void BTerm() : {}
+{
+    BFactor() BTermTail()
+}
+
+void BTermTail() : {}
+{
+    (<AND> BFactor())*
+}
+
+void BFactor() : {}
+{
+    (<NOT> BoolValue()) | BoolValue()
+}
+
+void BoolValue() : {}
+{
+   LOOKAHEAD(CompareExpression()) CompareExpression() | <TRUE> | <FALSE> | LOOKAHEAD(3) <LPAREN> BoolExpression() <RPAREN> | LOOKAHEAD(3) <ID>| LOOKAHEAD(3) FunctionCall()
+}
+
+
+void CompareExpression() : {}
+{
+    ArithmeticExpression() CompareOperator() ArithmeticExpression()
+}
+
+void CompareOperator() : {}
+{
+    <LESS> | <GREATER> | <LESSEQUAL> | <GREATEREQUAL> | <EQUAL> | <NOTEQUAL>
+}
+
+
+// Add more parser methods here following your grammar's structure
+
+
+void ArithmeticExpression() : {}
+{
+    ATerm() ArithmeticExpressionTail()
+}
+
+
+void ArithmeticExpressionTail() : {}
+{
+    ( <PLUS>ATerm() | <MINUS> ATerm() )*
+}
+
+void ATerm() : {}
+{
+    AFactor() ATermTail()
+}
+
+void ATermTail() : {}
+{
+    ( <MULT> AFactor() | <DIV> AFactor() )*
+}
+
+void AFactor() : {}
+{
+    <NUMBER_LITERAL> | <ID> | <LPAREN> ArithmeticExpression() <RPAREN> | FunctionCall()
+}
+
