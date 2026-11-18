@@ -1,5 +1,16 @@
 # Compiler_Construction
-A small compiler for calculator using javacc
+A small JavaCC-based compiler project for a calculator language.
+
+## Problem
+
+Writing a parser and generating executable code by hand is difficult and error-prone. This project demonstrates how a grammar can be used to define a language, parse input, construct syntax structures, and generate calculator code.
+
+## Main Feature
+
+The main feature is JavaCC grammar-based parsing and code generation for arithmetic calculator expressions, with supporting examples for a final parser and JJTree implementation.
+
+## Project Folders
+
 <p>We have 3 folders:</p>
 <ul>
   <li><b>Code Generation of Calculator</b> - This folder contains the file for code generation, which works exclusively with float number values and parses the output from its input file.</li>
@@ -39,6 +50,7 @@ You can either download the JavaCC jar directly or use a build tool like Maven o
   - Go to `Libraries`, click the `+` button, and add the `javacc.jar` file.
 
 [Additional Installation Information](https://stackoverflow.com/questions/60589049/how-to-setup-javacc-in-windows-10)
+
 #### Using Maven
 
 Add the following dependency to your `pom.xml`:
@@ -50,6 +62,7 @@ Add the following dependency to your `pom.xml`:
     <version>7.0.10</version> <!-- Check for the latest version -->
 </dependency>
 ```
+
 # Guide to Using JavaCC in IntelliJ IDEA and Command Prompt
 
 This guide provides a step-by-step approach to working with JavaCC, including creating grammar files, compiling grammars, generating parsers, troubleshooting, and running files in IntelliJ IDEA and the command prompt.
@@ -107,7 +120,6 @@ This guide provides a step-by-step approach to working with JavaCC, including cr
 
 ![Output of the Parser](./Whole_Parser_output.png)
 
-
 ### Implementing JJTree
 
 - Follow the guide on [how to implement JJTree on grammar](https://stackoverflow.com/questions/13902239/how-to-implement-jjtree-on-grammar).
@@ -116,6 +128,7 @@ This guide provides a step-by-step approach to working with JavaCC, including cr
 - Run the following command: `java -cp path/to/javacc.jar jjtree MyGrammar.jjt` then `java -cp path/to/javacc.jar javacc MyGrammar.jj`
 - Compile with: `javac *.java`
 - Run your parser with a test input: `java MyLanguageParser 'Your test input here'`
+
 ![Input for JJTree as Argument](./input_for_jjtree_as_argument.png)
 
 **Note:** If `java -cp` doesn’t work for you, then use only `jjtree MyGrammar.jjt` and `javacc MyGrammar.jj`.
@@ -123,7 +136,7 @@ This guide provides a step-by-step approach to working with JavaCC, including cr
 
 ## For Running the Generated Code
 
-After you have generated the parser as per the instructions in the previous sections, you can run the generated code to see it in action. This example focuses on running a calculator program generated from a `.jj` file.
+After you have generated the parser as per the instructions in the previous sections, you can run the generated code to see it in action. This example focuses on running a calculator program generated using JavaCC.
 
 ### Steps to Run the Calculator Program
 
@@ -131,7 +144,7 @@ After you have generated the parser as per the instructions in the previous sect
 
 2. **Locate the Calculator Grammar File**: Inside the directory, go to `src` and find the `Calculator.jj` file. This file contains the grammar definitions used by JavaCC to generate the parser.
 
-3. **Compile and Run the Program**: Follow the instructions provided in the "Compiling Your Grammar" and "Running File in the Command Prompt" sections to compile the `.jj` file and run the generated parser. In this case, your commands in the terminal or command prompt might look something like this:
+3. **Compile and Run the Program**: Follow the instructions provided in the "Compiling Your Grammar" and "Running File in the Command Prompt" sections to compile the `.jj` file and run the generated Java code.
 
     ```bash
     java -cp path/to/javacc.jar javacc Calculator.jj
@@ -141,7 +154,8 @@ After you have generated the parser as per the instructions in the previous sect
 
     Replace `path/to/javacc.jar` with the actual path to your `javacc.jar` file, and ensure you're in the directory containing `Calculator.jj` when you run these commands.
 
-4. **View Your Output**: After running the `Calculator` program, your output will be displayed in the command prompt or terminal window. This output will show the results of the calculator operations defined in your `Calculator.jj` grammar file.
+4. **View Your Output**: After running the `Calculator` program, your output will be displayed in the command prompt or terminal window. This output will show the results of the calculator operations.
+
 ### Ouptput of the Calculator
 
 ![Output of our Calculator](./calculator_output.png)
@@ -153,6 +167,3 @@ After you have generated the parser as per the instructions in the previous sect
 If you encounter any issues while running your generated code, refer back to the "Troubleshooting" section for guidance on common problems and solutions.
 
 ...
-
-
-
