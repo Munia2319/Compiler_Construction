@@ -1,0 +1,21 @@
+Algorithm name-CalculatorScript
+Declaration block- integer t1=10, t2=5, float b=3;
+start{
+    #"This is the comment"#
+    sum= t1+t2;
+    difference=t1-t2;
+    product=t1*t2;
+    quotient=t1/t2;
+    show(" Sum: " + sum);
+    show(" Difference: " + difference);
+    show(" Product: " + product);
+    show(" Quotient: " + quotient);
+    if (t2==0){
+    show(" Can't be zero ");
+    }
+    else{
+     show(" Not zero ");
+    }
+    while(t1>t2){
+    show(" This is the while statement ");
+    }}end
